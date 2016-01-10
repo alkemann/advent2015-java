@@ -1,8 +1,0 @@
-#surefire
-#Wed Jan 06 21:01:47 CET 2016
-maven.ext.class.path=C\:\\Program Files\\NetBeans 8.1\\java\\maven-nblib\\netbeans-eventspy.jar
-user.dir=E\:\\home\\Dokumenter\\NetBeansProjects\\Advent
-file.encoding=UTF-8
-localRepository=C\:\\Users\\alek\\.m2\\repository
-basedir=E\:\\home\\Dokumenter\\NetBeansProjects\\Advent
-test=com.alkemann.advent.five.PresentTwoTest
