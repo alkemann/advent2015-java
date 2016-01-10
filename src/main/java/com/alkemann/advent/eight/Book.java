@@ -16,7 +16,12 @@ public class Book {
     private void calculateCounts() {
         for (String s : list) {
             character_count_literal += s.length();
-            character_count_for_values += s.length(); // FIXME calculate rendered length
+
+            // Deal with \\ and \"
+            s = s.replaceAll("\\\\\\\\", "T"); // removes \\ by replacing with a single character
+            s = s.replaceAll("\"", ""); // removes the leading and ending " and converts all \" to \
+            s = s.replaceAll("\\\\x\\d\\d", "T"); // replaces \x23 with a single character
+            character_count_for_values += s.length(); // having removed two of the escapes we add the rst
         }
     }
 

@@ -5,22 +5,23 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BookTest {
 
     @Test
     public void testHowManyExtraCharacters() throws Exception {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         list.add("\"\"");
         list.add("\"abc\"");
         list.add("\"aaa\\\"aaa\"");
         list.add("\"\\x27\"");
+        list.add("\"b\\\\b\"");
         Book book = new Book(list);
-        System.out.println(book.list);
-
-        assertEquals(23, book.character_count_literal);
-        assertEquals(11, book.character_count_for_values);
-        assertEquals(12, book.howManyExtraCharacters());
+        int expected_literals = 2 + 5 + 10 + 6 + 6;
+        assertEquals("Wrong literals", expected_literals, book.character_count_literal);
+        int expected_valued = /*0 + */ 3 + 7 + 1 + 3;
+        assertEquals("Wrong valued", expected_valued, book.character_count_for_values);
+        assertEquals("Wrong extra", expected_literals - expected_valued, book.howManyExtraCharacters());
     }
 }
