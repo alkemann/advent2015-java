@@ -20,7 +20,7 @@ public class Book {
             // Deal with \\ and \"
             s = s.replaceAll("\\\\\\\\", "T"); // removes \\ by replacing with a single character
             s = s.replaceAll("\"", ""); // removes the leading and ending " and converts all \" to \
-            s = s.replaceAll("\\\\x\\d\\d", "T"); // replaces \x23 with a single character
+            s = s.replaceAll("\\\\x[\\da-fA-F]{2}", "T"); // replaces \x23 with a single character
             character_count_for_values += s.length(); // having removed two of the escapes we add the rst
         }
     }
