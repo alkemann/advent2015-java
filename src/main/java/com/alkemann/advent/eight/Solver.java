@@ -11,7 +11,7 @@ public class Solver extends FileSolver {
 
     public Solver(String filename) {
         this.readFile(filename);
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         while (scanner.hasNextLine()) {
             list.add(scanner.nextLine());
         }
@@ -22,6 +22,8 @@ public class Solver extends FileSolver {
         Solver solver = new Solver("src\\main\\resources\\eight.txt");
         System.out.println("************************************");
         System.out.println(" Extra character count: " + solver.book.howManyExtraCharacters());
+        System.out.println("************************************");
+        System.out.println(" Encoded character count: " + solver.book.howManyExtraEncoded());
         System.out.println("************************************");
     }
 }

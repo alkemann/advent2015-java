@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class BookTest {
 
     @Test
-    public void testHowManyExtraCharacters() throws Exception {
+    public void testIt() throws Exception {
         List<String> list = new ArrayList<>();
         list.add("\"\"");
         list.add("\"abc\"");
@@ -25,5 +25,8 @@ public class BookTest {
         int expected_valued = /*0 + */ 3 + 7 + 1 + 3 + 6;
         assertEquals("Wrong valued", expected_valued, book.character_count_for_values);
         assertEquals("Wrong extra", expected_literals - expected_valued, book.howManyExtraCharacters());
+        int expteded_encoded = 6 + 9 + 16 + 11 + 12 + 21;
+        assertEquals("Wrong encoded", expteded_encoded - expected_literals, book.howManyExtraEncoded());
     }
+
 }
