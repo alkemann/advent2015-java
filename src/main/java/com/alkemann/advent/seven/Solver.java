@@ -9,13 +9,13 @@ import java.util.List;
 
 public class Solver extends FileSolver{
 
-    public static void main(String[] args) throws UnknownGateTypeException {
+    public static void main(String[] args) {
         Solver solver = new Solver();
         solver.readFile("src\\main\\resources\\seven.txt");
         solver.solve();
     }
 
-    private void solve() throws UnknownGateTypeException {
+    private void solve() {
         List<String> commands = new ArrayList<String>();
         while (scanner.hasNextLine()) {
             commands.add(scanner.nextLine());

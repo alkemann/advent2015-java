@@ -1,4 +1,4 @@
 package com.alkemann.advent.seven.errors;
 
-public class CircuitHasNotRunException extends Throwable {
+public class CircuitHasNotRunException extends RuntimeException {
 }

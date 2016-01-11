@@ -19,7 +19,7 @@ public class GateParser {
 
      HashMap<Gate.Type, Pattern> patterns = new HashMap<>(6);
 
-    public GateParser(String description) throws UnknownGateTypeException {
+    public GateParser(String description) {
         this.description = description;
         /*
         "456 -> y"
