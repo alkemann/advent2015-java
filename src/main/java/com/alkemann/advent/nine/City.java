@@ -1,6 +1,9 @@
 package com.alkemann.advent.nine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
 
 public class City {
 
@@ -8,6 +11,7 @@ public class City {
     protected HashMap<String, Integer> routes;
     protected HashMap<String, City> neighbors;
     protected int cost = Integer.MAX_VALUE;
+    protected boolean visited = false;
 
     public City(String name) {
         this.name = name;
@@ -25,7 +29,26 @@ public class City {
         return "City{name='" + name + "', cost=" + cost  + "'}";
     }
 
-    public HashMap<String, City> getNeighbors() {
-        return (HashMap<String, City>) neighbors.clone();
+    public List<City> getNeighbors() {
+        List<City> unvistedNeighbors = new ArrayList<>();
+        for (Entry<String, City> entry : neighbors.entrySet()) {
+            City c = entry.getValue();
+            if (c.isVisited() == false) {
+                unvistedNeighbors.add(c);
+            }
+        }
+        return unvistedNeighbors;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void visited() {
+        visited = true;
+    }
+
+    public int distanceTo(String neighborCityName) {
+        return routes.get(neighborCityName);
     }
 }

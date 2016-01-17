@@ -11,6 +11,7 @@ public class Travel {
     protected Pattern pattern = Pattern.compile("(\\w+) to (\\w+) = (\\d+)");
     protected int shortestDistance = -1;
     protected HashMap<String, City> cities = new HashMap<>(10);
+    private int longestDistance = -1;
 
     public Travel(List<String> parts) {
         parts.forEach(this::addPart);
@@ -31,7 +32,6 @@ public class Travel {
             City toCity = getCity(to);
             fromCity.addRoute(toCity, distance);
             toCity.addRoute(fromCity, distance);
-            System.out.println(toCity);
         } else {
             throw new RuntimeException("Didnt match pattern " + s);
         }
@@ -43,9 +43,62 @@ public class Travel {
         return cities.get(name);
     }
 
-    public int getShortestDistance(String cityName) {
-        City city = cities.get(cityName);
-        HashMap<String, City> n = city.getNeighbors();
+    public int getShortestDistance(String startingCityName) {
+        City startingCity = cities.get(startingCityName);
+        shortestDistance = 0;
+        rec(startingCity);
+        cities.forEach((s, city) -> city.visited = false);
         return shortestDistance;
+    }
+
+    private void rec(City city) {
+        List<City> near = city.getNeighbors();
+        if (near.isEmpty()) {
+            return; // all the way through
+        }
+        int cheapestCost = Integer.MAX_VALUE;
+        City cheapestCity = null;
+        for (City c : near) {
+            int distance = city.distanceTo(c.name) ;
+            if (distance < cheapestCost) {
+                cheapestCity = c;
+                cheapestCost = distance;
+            }
+        }
+        city.visited();
+        shortestDistance += cheapestCost;
+        rec(cheapestCity);
+    }
+
+    public int getLongestDistance(String startingCityName) {
+        City startingCity = cities.get(startingCityName);
+        longestDistance = 0;
+        recLongest(startingCity);
+        cities.forEach((s, city) -> city.visited = false );
+        return longestDistance;
+    }
+
+    private void recLongest(City city) {
+        if (city == null) {
+            System.out.println("NULL CITY");
+            System.exit(-1);
+        }
+
+        List<City> near = city.getNeighbors();
+        if (near.isEmpty()) {
+            return; // all the way through
+        }
+        int cheapestCost = 0;
+        City cheapestCity = null;
+        for (City c : near) {
+            int distance = city.distanceTo(c.name) ;
+            if (distance > cheapestCost) {
+                cheapestCity = c;
+                cheapestCost = distance;
+            }
+        }
+        city.visited();
+        longestDistance += cheapestCost;
+        recLongest(cheapestCity);
     }
 }
